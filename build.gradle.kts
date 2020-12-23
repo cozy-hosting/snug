@@ -1,9 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+val kotlinVersion: String by project
+
 val koinVersion: String by project
 val kediatrVersion: String by project
 val valiktorVersion: String by project
 val cliktVersion: String by project
+val ktsrunnerVersion: String by project
+
 val junitVersion: String by project
 
 plugins {
@@ -14,9 +18,14 @@ plugins {
 group = "it.oechsler"
 version = "0.0.1"
 
+
 repositories {
     mavenCentral()
     jcenter()
+
+    maven {
+        setUrl("https://dl.bintray.com/s1m0nw1/KtsRunner")
+    }
 }
 
 dependencies {
@@ -25,6 +34,9 @@ dependencies {
     implementation("com.trendyol:kediatr-core:$kediatrVersion")
     implementation("org.valiktor:valiktor-core:$valiktorVersion")
     implementation("com.github.ajalt.clikt:clikt:$cliktVersion")
+    implementation("org.jetbrains.kotlin:kotlin-scripting-common:$kotlinVersion")
+    implementation("org.jetbrains.kotlin:kotlin-scripting-jvm:$kotlinVersion")
+    implementation("org.jetbrains.kotlin:kotlin-scripting-jvm-host:$kotlinVersion")
 
     // Dependencies used for testing the application
     testImplementation(kotlin("test-junit5"))
@@ -41,7 +53,7 @@ tasks.withType<KotlinCompile> {
 }
 
 application {
-    mainClassName = "MainKt"
+    mainClassName = "it.oechsler.MainKt"
 }
 
 kotlin.sourceSets["main"].kotlin.srcDirs("src")
