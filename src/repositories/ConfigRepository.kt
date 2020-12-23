@@ -5,7 +5,6 @@ import java.io.File
 
 
 interface ConfigRepository {
-    val configPath: String
     val configFile: File
     public fun get(): Config
     public fun create(config: Config)
