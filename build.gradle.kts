@@ -7,11 +7,13 @@ val kediatrVersion: String by project
 val valiktorVersion: String by project
 val cliktVersion: String by project
 val ktsrunnerVersion: String by project
+val serializationVersion: String by project
 
 val junitVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.4.10"
+    kotlin("plugin.serialization") version "1.4.10"
     application
 }
 
@@ -37,6 +39,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-scripting-common:$kotlinVersion")
     implementation("org.jetbrains.kotlin:kotlin-scripting-jvm:$kotlinVersion")
     implementation("org.jetbrains.kotlin:kotlin-scripting-jvm-host:$kotlinVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
 
     // Dependencies used for testing the application
     testImplementation(kotlin("test-junit5"))
