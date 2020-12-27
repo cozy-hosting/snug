@@ -10,7 +10,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 @KoinApiExtension
-class ApplyCommand: CliktCommand(name = "apply", help = "Evaluates and applies a configuration file"), KoinComponent {
+class ApplyCommand: CliktCommand(name = "apply", help = "Evaluate and apply a resource script"), KoinComponent {
 
     private val scriptService: ScriptService by inject()
 

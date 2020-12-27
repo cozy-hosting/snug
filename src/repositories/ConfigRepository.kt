@@ -5,8 +5,11 @@ import java.io.File
 
 
 interface ConfigRepository {
-    val configFile: File
-    public fun get(): Config
-    public fun create(config: Config)
-    public fun delete()
+
+    fun retrieve(): Config?
+
+    fun create(config: Config)
+
+    fun delete()
+
 }

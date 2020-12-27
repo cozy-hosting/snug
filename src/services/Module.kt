@@ -7,6 +7,5 @@ fun KoinApplication.services() {
     val services = module(createdAtStart = true) {
         single<ScriptService> { ScriptServiceImpl() }
     }
-
     modules(services)
 }

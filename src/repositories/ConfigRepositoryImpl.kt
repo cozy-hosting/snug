@@ -5,22 +5,40 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
-
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
 
 class ConfigRepositoryImpl : ConfigRepository {
 
-    override val configFile: File = File(System.getProperty("user.home") + "/.snug/config.json")
-    override fun get(): Config {
-        return Json.decodeFromString(configFile.readText())
+    private val configPath: Path = Paths.get("${System.getProperty("user.home")}/.snug")
+
+    private val configFile: File = File("$configPath/config.json")
+
+    private val serializer = Json { prettyPrint = true }
+
+    override fun retrieve(): Config? {
+        if (configFile.exists())
+            return null
+
+        val configString = configFile.readText()
+
+        return serializer.decodeFromString<Config>(configString)
     }
 
     override fun create(config: Config) {
-        configFile.mkdirs()
+        Files.createDirectories(configPath)
         configFile.createNewFile()
-        configFile.writeText(Json.encodeToString(config))
+
+        val configString = serializer.encodeToString(config)
+
+        configFile.writeText(configString)
     }
 
     override fun delete() {
+        if (!configFile.exists())
+            return
+
         configFile.delete()
     }
 

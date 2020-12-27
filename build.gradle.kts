@@ -24,10 +24,6 @@ version = "0.0.1"
 repositories {
     mavenCentral()
     jcenter()
-
-    maven {
-        setUrl("https://dl.bintray.com/s1m0nw1/KtsRunner")
-    }
 }
 
 dependencies {
@@ -36,6 +32,7 @@ dependencies {
     implementation("com.trendyol:kediatr-core:$kediatrVersion")
     implementation("org.valiktor:valiktor-core:$valiktorVersion")
     implementation("com.github.ajalt.clikt:clikt:$cliktVersion")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
     implementation("org.jetbrains.kotlin:kotlin-scripting-common:$kotlinVersion")
     implementation("org.jetbrains.kotlin:kotlin-scripting-jvm:$kotlinVersion")
     implementation("org.jetbrains.kotlin:kotlin-scripting-jvm-host:$kotlinVersion")
@@ -52,7 +49,7 @@ tasks.withType<Test> {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
 }
 
 application {
