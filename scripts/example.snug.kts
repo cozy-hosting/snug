@@ -1,5 +1,3 @@
-import it.oechsler.language.Greeting.Companion.greet
+import it.oechsler.language.Ping.Companion.ping
 
-greet("Tim") {
-    from("Samuel")
-}
+ping()

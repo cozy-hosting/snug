@@ -6,8 +6,8 @@ val koinVersion: String by project
 val kediatrVersion: String by project
 val valiktorVersion: String by project
 val cliktVersion: String by project
-val ktsrunnerVersion: String by project
 val serializationVersion: String by project
+val ktorVersion: String by project
 
 val junitVersion: String by project
 
@@ -37,6 +37,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-scripting-jvm:$kotlinVersion")
     implementation("org.jetbrains.kotlin:kotlin-scripting-jvm-host:$kotlinVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+    implementation("io.ktor:ktor-client-core:$ktorVersion")
+    implementation("io.ktor:ktor-client-cio:$ktorVersion")
 
     // Dependencies used for testing the application
     testImplementation(kotlin("test-junit5"))
