@@ -10,7 +10,7 @@ import org.koin.core.component.inject
 
 @KoinApiExtension
 @Suppress("unused")
-class Ping private constructor() : KoinComponent {
+class Ping private constructor() : ScriptRoot, KoinComponent {
 
     private val httpClient: HttpClient by inject()
 
@@ -34,6 +34,10 @@ class Ping private constructor() : KoinComponent {
         return runBlocking {
             httpClient.get(requestUrl)
         }
+    }
+
+    override fun run() {
+        println(this)
     }
 
 }

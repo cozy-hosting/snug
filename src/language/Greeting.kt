@@ -1,6 +1,7 @@
 package it.oechsler.language
 
-class Greeting private constructor(private val name: String?) {
+@Suppress("unused")
+class Greeting private constructor(private val name: String?) : ScriptRoot {
 
     companion object {
 
@@ -29,6 +30,10 @@ class Greeting private constructor(private val name: String?) {
             "Greetings, $name!"
         else
             "Greetings, $name from $from!"
+    }
+
+    override fun run() {
+        println(this)
     }
 
 }
