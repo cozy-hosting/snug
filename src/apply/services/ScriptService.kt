@@ -1,4 +1,4 @@
-package it.oechsler.services
+package it.oechsler.apply.services
 
 import java.nio.file.Path
 import kotlin.reflect.KClass

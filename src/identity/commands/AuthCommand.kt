@@ -1,11 +1,11 @@
-package it.oechsler.commands
+package it.oechsler.identity.commands
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.option
 import com.trendyol.kediatr.CommandBus
-import it.oechsler.features.AuthCommandBus
-import it.oechsler.features.auth.SaveAuthTokenCommand
-import it.oechsler.features.auth.data.AuthToken
+import it.oechsler.identity.AuthCommandBus
+import it.oechsler.identity.data.AuthConfig
+import it.oechsler.identity.data.AuthToken
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -21,18 +21,18 @@ class AuthCommand : CliktCommand(name = "auth", help = "Authenticate with the co
 
     override fun run() {
         token?.let {
-            return saveToken(it)
+            return saveConfig(it)
         }
 
         // Other options might be possible from here,
         // for example OAuth with the api in a web browser
     }
 
-    private fun saveToken(token: String) {
+    private fun saveConfig(token: String) {
         val authToken = AuthToken(token)
-
-        val saveAuthTokenCommand = SaveAuthTokenCommand(authToken)
-        authCommandBus.executeCommand(saveAuthTokenCommand)
+        val authConfig = AuthConfig(authToken)
+        val saveAuthConfigCommand = SaveAuthConfigCommand(authConfig)
+        authCommandBus.executeCommand(saveAuthConfigCommand)
 
         echo("Successfully authenticated with token \"$authToken\".")
     }

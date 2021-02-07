@@ -1,16 +1,12 @@
-package it.oechsler.services
+package it.oechsler.apply.services
 
 import it.oechsler.services.data.ScriptException
 import it.oechsler.services.data.SnugScript
-import java.io.File
-import java.lang.Exception
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.reflect.KClass
 import kotlin.reflect.jvm.jvmName
-import kotlin.script.experimental.api.EvaluationResult
 import kotlin.script.experimental.api.ResultValue
-import kotlin.script.experimental.api.ResultWithDiagnostics
 import kotlin.script.experimental.api.valueOrNull
 import kotlin.script.experimental.host.toScriptSource
 import kotlin.script.experimental.jvm.dependenciesFromCurrentContext

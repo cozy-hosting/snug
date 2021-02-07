@@ -1,6 +1,6 @@
-package it.oechsler.repositories
+package it.oechsler.config.repositories
 
-import it.oechsler.repositories.data.Config
+import it.oechsler.config.data.Config
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -18,11 +18,10 @@ class ConfigRepositoryImpl : ConfigRepository {
     private val serializer = Json { prettyPrint = true }
 
     override fun retrieve(): Config? {
-        if (configFile.exists())
+        if (!configFile.exists())
             return null
 
         val configString = configFile.readText()
-
         return serializer.decodeFromString<Config>(configString)
     }
 

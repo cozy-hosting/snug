@@ -1,9 +1,11 @@
-package it.oechsler.features.auth.data
+package it.oechsler.identity.data
 
+import kotlinx.serialization.Serializable
 import org.valiktor.functions.isNotBlank
 import org.valiktor.functions.isNotEmpty
 import org.valiktor.validate
 
+@Serializable
 data class AuthToken(val token: String) {
 
     init {

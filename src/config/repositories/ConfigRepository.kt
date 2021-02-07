@@ -1,7 +1,6 @@
-package it.oechsler.repositories
+package it.oechsler.config.repositories
 
-import it.oechsler.repositories.data.Config
-import java.io.File
+import it.oechsler.config.data.Config
 
 
 interface ConfigRepository {
