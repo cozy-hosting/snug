@@ -2,7 +2,7 @@ package it.oechsler.language
 
 import io.ktor.client.*
 import io.ktor.client.request.*
-import it.oechsler.services.ApiService
+import it.oechsler.api.services.ApiService
 import kotlinx.coroutines.runBlocking
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
@@ -25,7 +25,6 @@ class Ping private constructor() : ScriptRoot, KoinComponent {
         fun ping(): Ping {
             return Ping()
         }
-
     }
 
     override fun toString(): String {

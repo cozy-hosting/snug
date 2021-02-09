@@ -1,4 +1,4 @@
-package it.oechsler.services
+package it.oechsler.api.services
 
 import io.ktor.http.*
 

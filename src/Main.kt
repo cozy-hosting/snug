@@ -1,12 +1,11 @@
 package it.oechsler
 
 import com.github.ajalt.clikt.core.subcommands
-import it.oechsler.commands.ApplyCommand
-import it.oechsler.commands.AuthCommand
-import it.oechsler.commands.MainCommand
-import it.oechsler.features.features
-import it.oechsler.repositories.repositories
-import it.oechsler.services.services
+import it.oechsler.apply.apply
+import it.oechsler.apply.commands.ApplyCommand
+import it.oechsler.identity.commands.AuthCommand
+import it.oechsler.identity.identity
+import it.oechsler.main.commands.MainCommand
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.context.startKoin
 
@@ -15,9 +14,8 @@ fun main(args: Array<String>) {
     startKoin {
         // Register modules
         // for dependency injection
-        features()
-        services()
-        repositories()
+        identity()
+        apply()
 
         // Build the command line parser
         MainCommand()
