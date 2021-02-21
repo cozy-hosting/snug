@@ -1,13 +1,9 @@
-package it.oechsler.language
+package it.oechsler.script.language
 
 @Suppress("unused")
 class Greeting private constructor(private val name: String?) : ScriptRoot {
 
     companion object {
-
-        private operator fun invoke(): Greeting {
-            return Greeting()
-        }
 
         fun greet(name: String): Greeting {
             return Greeting(name)
@@ -32,8 +28,12 @@ class Greeting private constructor(private val name: String?) : ScriptRoot {
             "Greetings, $name from $from!"
     }
 
-    override fun run() {
+    override fun apply() {
         println(this)
+    }
+
+    override fun rollback() {
+        TODO("Not yet implemented")
     }
 
 }

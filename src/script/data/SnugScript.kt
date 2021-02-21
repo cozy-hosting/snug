@@ -1,4 +1,4 @@
-package it.oechsler.services.data
+package it.oechsler.script.data
 
 import kotlin.script.experimental.annotations.KotlinScript
 

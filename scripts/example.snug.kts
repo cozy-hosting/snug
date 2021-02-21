@@ -1,11 +1,8 @@
-import it.oechsler.language.ScriptRoot
+import it.oechsler.script.language.DeploymentBuilder.Companion.deploy
 
-println("This is some stuff that I defined!")
-
-object : ScriptRoot {
-
-    override fun run() {
-        println("Hello World")
-    }
-
+deploy {
+    name = "nginx"
+    withTags("personal", "website")
+    replicas = 3
 }
+

@@ -1,4 +1,4 @@
-package it.oechsler.language
+package it.oechsler.script.language
 
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -35,8 +35,12 @@ class Ping private constructor() : ScriptRoot, KoinComponent {
         }
     }
 
-    override fun run() {
+    override fun apply() {
         println(this)
+    }
+
+    override fun rollback() {
+        TODO("Not yet implemented")
     }
 
 }
