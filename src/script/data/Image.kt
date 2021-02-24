@@ -1,24 +1,19 @@
 package it.oechsler.script.data
 
 import kotlinx.serialization.Serializable
-import org.valiktor.functions.isIn
 import org.valiktor.functions.isNotBlank
 import org.valiktor.functions.isNotEmpty
 import org.valiktor.validate
 
 @Serializable
-data class Deployment(
+data class Image(
     val name: String,
-    val tags: Set<String>,
-    val replicas: Int,
-    val containers: Set<Container>,
-) {
-
+    val tag: String
+){
     init {
         validate(this) {
-            validate(Deployment::name).isNotEmpty().isNotBlank()
-            validate(Deployment::replicas).isIn(1..10)
+            validate(Image::name).isNotEmpty().isNotBlank()
+            validate(Image::tag).isNotEmpty().isNotBlank()
         }
     }
-
 }

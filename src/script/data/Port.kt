@@ -7,18 +7,16 @@ import org.valiktor.functions.isNotEmpty
 import org.valiktor.validate
 
 @Serializable
-data class Deployment(
+data class Port(
     val name: String,
-    val tags: Set<String>,
-    val replicas: Int,
-    val containers: Set<Container>,
-) {
-
+    val container: Int,
+    val pod: Int
+){
     init {
         validate(this) {
-            validate(Deployment::name).isNotEmpty().isNotBlank()
-            validate(Deployment::replicas).isIn(1..10)
+            validate(Port::name).isNotEmpty().isNotBlank()
+            validate(Port::container).isIn(1..65535)
+            validate(Port::pod).isIn(1..65535)
         }
     }
-
 }
