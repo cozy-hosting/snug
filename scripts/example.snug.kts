@@ -11,8 +11,8 @@ deploy {
         name="proxy"
         image = Image("nginx", "latest")
         ports {
-            "Port1" bind "8080:80"
-            "Port2" bind "80:8080"
+            5000 to 8080
+            80 to 8081
         }
     }
 }

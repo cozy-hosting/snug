@@ -9,7 +9,7 @@ import org.valiktor.validate
 data class Image(
     val name: String,
     val tag: String
-){
+) {
     init {
         validate(this) {
             validate(Image::name).isNotEmpty().isNotBlank()

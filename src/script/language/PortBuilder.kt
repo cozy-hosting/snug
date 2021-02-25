@@ -15,9 +15,9 @@ class PortBuilder private constructor() {
 
     private var ports = setOf<Port>()
 
-    infix fun String.bind (value: String) {
-        val ports = value.split(":")
-        addPort(Port(this, ports[0].toInt(), ports[1].toInt()))
+    //TODO: Provide list of common ports to name the port-mapping
+    infix fun Int.to (value: Int) {
+        addPort(Port(this, value))
     }
 
     fun addPort(port: Port){

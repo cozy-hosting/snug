@@ -10,7 +10,7 @@ data class Container(
     val name: String,
     val image: Image,
     val ports: Set<Port>,
-){
+) {
     init {
         validate(this) {
             validate(Container::name).isNotEmpty().isNotBlank()
