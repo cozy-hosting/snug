@@ -16,5 +16,4 @@ data class Container(
             validate(Container::name).isNotEmpty().isNotBlank()
         }
     }
-
 }

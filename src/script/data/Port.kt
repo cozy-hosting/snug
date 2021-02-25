@@ -8,7 +8,7 @@ import org.valiktor.validate
 data class Port(
     val container: Int,
     val pod: Int
-){
+) {
     init {
         validate(this) {
             validate(Port::container).isIn(1..65535)

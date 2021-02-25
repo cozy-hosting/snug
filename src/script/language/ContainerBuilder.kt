@@ -3,14 +3,13 @@ package it.oechsler.script.language
 import it.oechsler.script.data.Container
 import it.oechsler.script.data.Image
 import it.oechsler.script.data.Port
-import it.oechsler.script.language.PortBuilder.Companion.portsBlock
 
 @Suppress("unused")
 class ContainerBuilder private constructor() {
 
     companion object {
 
-        fun containerBlock(init: ContainerBuilder.() -> Unit): ContainerBuilder {
+        fun container(init: ContainerBuilder.() -> Unit): ContainerBuilder {
             return ContainerBuilder().apply(init)
         }
 
@@ -21,7 +20,7 @@ class ContainerBuilder private constructor() {
     private var ports = setOf<Port>()
 
     fun ports(block: PortBuilder.() -> Unit) {
-        this.ports = portsBlock(block).toPorts()
+        this.ports = PortBuilder.ports(block).toPorts()
     }
 
     fun toContainer(): Container {

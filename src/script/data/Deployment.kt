@@ -13,12 +13,10 @@ data class Deployment(
     val replicas: Int,
     val containers: Set<Container>,
 ) {
-
     init {
         validate(this) {
             validate(Deployment::name).isNotEmpty().isNotBlank()
             validate(Deployment::replicas).isIn(1..10)
         }
     }
-
 }

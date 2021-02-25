@@ -7,7 +7,7 @@ class PortBuilder private constructor() {
 
     companion object {
 
-        fun portsBlock(init: PortBuilder.() -> Unit): PortBuilder {
+        fun ports(init: PortBuilder.() -> Unit): PortBuilder {
             return PortBuilder().apply(init)
         }
 
@@ -15,15 +15,15 @@ class PortBuilder private constructor() {
 
     private var ports = setOf<Port>()
 
-    //TODO: Provide list of common ports to name the port-mapping
-    infix fun Int.to (value: Int) {
-        addPort(Port(this, value))
-    }
-
-    fun addPort(port: Port){
+    private fun addPort(port: Port){
         val mutableSet = this.ports.toMutableSet()
         mutableSet.add(port)
         this.ports = mutableSet
+    }
+
+    //TODO: Provide list of common ports to name the port-mapping
+    infix fun Int.to (value: Int) {
+        addPort(Port(this, value))
     }
 
     fun toPorts(): Set<Port> {
@@ -31,4 +31,3 @@ class PortBuilder private constructor() {
     }
 
 }
-

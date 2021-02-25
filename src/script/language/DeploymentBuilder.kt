@@ -2,7 +2,6 @@ package it.oechsler.script.language
 
 import it.oechsler.script.data.Container
 import it.oechsler.script.data.Deployment
-import it.oechsler.script.language.ContainerBuilder.Companion.containerBlock
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlin.properties.Delegates
@@ -33,7 +32,7 @@ class DeploymentBuilder private constructor() : ScriptRoot {
 
      fun container(block: ContainerBuilder.() -> Unit) {
         val mutableSet = this.containers.toMutableSet()
-        mutableSet.add(containerBlock(block).toContainer())
+        mutableSet.add(ContainerBuilder.container(block).toContainer())
         this.containers = mutableSet
      }
 
