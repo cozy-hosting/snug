@@ -1,11 +1,19 @@
-import it.oechsler.language.ScriptRoot
+import it.oechsler.script.language.DeploymentBuilder.Companion.deploy
+import it.oechsler.script.data.Image
+import it.oechsler.script.data.Port
 
-println("This is some stuff that I defined!")
+deploy {
+    name = "nginx"
+    tags("personal", "website")
+    replicas = 3
 
-object : ScriptRoot {
-
-    override fun run() {
-        println("Hello World")
+    container {
+        name="proxy"
+        image = Image("nginx", "latest")
+        ports {
+            5000 to 8080
+            80 to 8081
+        }
     }
-
 }
+

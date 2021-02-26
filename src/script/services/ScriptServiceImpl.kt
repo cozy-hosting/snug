@@ -1,7 +1,7 @@
-package it.oechsler.apply.services
+package it.oechsler.script.services
 
-import it.oechsler.services.data.ScriptException
-import it.oechsler.services.data.SnugScript
+import it.oechsler.script.data.ScriptException
+import it.oechsler.script.data.SnugScript
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.reflect.KClass
