@@ -15,8 +15,12 @@ class ContainerBuilder private constructor(val name: String) {
 
     }
 
-    lateinit var image: Image
+    private lateinit var image: Image
     private var ports = setOf<Port>()
+
+    fun image(name: String, tag: String) {
+        image = ImageBuilder.image(name, tag).toImage()
+    }
 
     fun ports(block: PortBuilder.() -> Unit) {
         this.ports = PortBuilder.ports(block).toPorts()
