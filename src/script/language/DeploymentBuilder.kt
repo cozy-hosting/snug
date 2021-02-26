@@ -7,17 +7,16 @@ import kotlinx.serialization.json.Json
 import kotlin.properties.Delegates
 
 @Suppress("unused")
-class DeploymentBuilder private constructor() : ScriptRoot {
+class DeploymentBuilder private constructor(val name: String) : ScriptRoot {
 
     companion object {
 
-        fun deploy(init: DeploymentBuilder.() -> Unit): DeploymentBuilder {
-            return DeploymentBuilder().apply(init)
+        fun deploy(name: String, init: DeploymentBuilder.() -> Unit): DeploymentBuilder {
+            return DeploymentBuilder(name).apply(init)
         }
 
     }
 
-    lateinit var name: String
     var replicas by Delegates.notNull<Int>()
     private var tags = setOf<String>()
     private var containers = setOf<Container>()
@@ -30,9 +29,9 @@ class DeploymentBuilder private constructor() : ScriptRoot {
         return Deployment(name, tags, replicas, containers)
     }
 
-     fun container(block: ContainerBuilder.() -> Unit) {
+     fun container(name: String, block: ContainerBuilder.() -> Unit) {
         val mutableSet = this.containers.toMutableSet()
-        mutableSet.add(ContainerBuilder.container(block).toContainer())
+        mutableSet.add(ContainerBuilder.container(name, block).toContainer())
         this.containers = mutableSet
      }
 
