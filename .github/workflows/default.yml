@@ -33,17 +33,4 @@ jobs:
           password: ${{ secrets.DO_PERSONAL_TOKEN }}
           registry: registry.digitalocean.com
           tags: "latest,${{ steps.version_bump.outputs.new_tag }}"
-          no_push: ${{ github.ref != 'refs/heads/master' }}
-           
-      - name: Build Docker image
-        if: github.ref != 'refs/heads/main'
-        run: |
-          docker build . -t snug:latest
-          
-      - name: Build and publish Docker image
-        if: github.ref == 'refs/heads/main'
-        uses: mr-smithers-excellent/docker-build-push@v5.2
-        with:
-          image: snug
-          tags: latest, ${{ steps.version_bump.outputs.new_tag }}
-          registry: oechsler.azurecr.io
+          no_push: ${{ github.ref != 'refs/heads/main' }}
