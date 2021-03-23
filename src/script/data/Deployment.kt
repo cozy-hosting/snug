@@ -12,6 +12,7 @@ data class Deployment(
     val tags: Set<String>,
     val replicas: Int,
     val containers: Set<Container>,
+    val publish: Publish,
 ) {
     init {
         validate(this) {
