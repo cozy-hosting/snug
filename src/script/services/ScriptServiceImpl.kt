@@ -1,18 +1,15 @@
 package it.oechsler.script.services
 
-import it.oechsler.script.data.ScriptException
-import it.oechsler.script.data.SnugScript
+import it.oechsler.script.data.*
+import it.oechsler.script.language.ScriptRoot
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.reflect.KClass
-import kotlin.reflect.jvm.jvmName
 import kotlin.script.experimental.api.ResultValue
+import kotlin.script.experimental.api.ScriptDiagnostic
 import kotlin.script.experimental.api.valueOrNull
 import kotlin.script.experimental.host.toScriptSource
-import kotlin.script.experimental.jvm.dependenciesFromCurrentContext
-import kotlin.script.experimental.jvm.jvm
 import kotlin.script.experimental.jvmhost.BasicJvmScriptingHost
-import kotlin.script.experimental.jvmhost.createJvmCompilationConfigurationFromTemplate
 
 class ScriptServiceImpl : ScriptService {
 
@@ -20,32 +17,32 @@ class ScriptServiceImpl : ScriptService {
 
         // NOTE: We need to do dynamic casting here, otherwise the loading
         // of scripts can not be done using the service layer pattern
-        private fun <T : Any> Any?.castOrError(clazz: KClass<T>): T =
+        private fun <T : ScriptRoot> Any?.toEntrypoint(clazz: KClass<T>): T =
             takeIf { clazz.isInstance(it) }?.let { clazz.javaObjectType.cast(it) }
-            ?: throw IllegalArgumentException("Cannot cast ${this!!::class.java} to expected type ${clazz.jvmName}")
+                ?: throw ScriptRuntimeException("Script does not have a valid entrypoint")
 
     }
 
-    override fun <T : Any> loadFromPath(script: Path, clazz: KClass<T>): T =
+    override fun <T : ScriptRoot> loadFromPath(script: Path, clazz: KClass<T>): T =
         loadFromString(Files.readString(script), clazz)
 
-    override fun <T : Any> loadFromString(script: String, clazz: KClass<T>): T =
+    override fun <T : ScriptRoot> loadFromString(script: String, clazz: KClass<T>): T =
         kotlin.runCatching { eval(script) }
-            .getOrElse { throw ScriptException("Could not evaluate script", it) }
-            .castOrError(clazz)
+            .getOrThrow()
+            .toEntrypoint(clazz)
 
     private fun eval(script: String): Any? {
-        val configuration = createJvmCompilationConfigurationFromTemplate<SnugScript> {
-            jvm {
-                dependenciesFromCurrentContext("cli")
-            }
+        val host = BasicJvmScriptingHost()
+        val result = host.evalWithTemplate<SnugScript>(script.toScriptSource())
+
+        val errors = result.reports
+            .filter { it.severity.ordinal <= ScriptDiagnostic.Severity.ERROR.ordinal }
+            .toList()
+        if (errors.isNotEmpty()) {
+            throw ScriptCompileException("Script did not compile successfully", errors)
         }
 
-        val evaluationResult = BasicJvmScriptingHost()
-            .eval(script.toScriptSource(), configuration, null)
-
-        val result = evaluationResult.valueOrNull()?.returnValue as ResultValue.Value
-        return result.value
+        return (result.valueOrNull()?.returnValue as? ResultValue.Value)?.value
     }
 
 }
