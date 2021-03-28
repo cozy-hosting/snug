@@ -1,14 +1,12 @@
 package it.oechsler.script.data
 
-import it.oechsler.script.language.ContainerBuilder
-import it.oechsler.script.language.DeploymentBuilder
-import it.oechsler.script.language.PortBuilder
+import it.oechsler.script.language.*
 import kotlin.script.experimental.annotations.KotlinScript
 import kotlin.script.experimental.api.*
 import kotlin.script.experimental.jvm.dependenciesFromClassContext
 import kotlin.script.experimental.jvm.jvm
 
-@Suppress("unused")
+
 @KotlinScript(
     displayName = "Snug Script",
     fileExtension = "snug.kts",
@@ -19,17 +17,22 @@ abstract class SnugScript
 
 object SnugScriptCompilationConfiguration : ScriptCompilationConfiguration({
     defaultImports(
-        Container::class,
-        Deployment::class,
-        Image::class,
-        Port::class,
-        ContainerBuilder::class,
+        // deployments
         DeploymentBuilder::class,
-        PortBuilder::class
+        ContainerBuilder::class,
+        PortBuilder::class,
+        ImageBuilder::class,
+        PublishBuilder::class,
+        PublishBuilder::class,
+        PublishDomainBuilder::class,
+        PublishPortBuilder::class,
+        // loadBalancers
+        LoadBalancerBuilder::class,
+        LoadBalancedDeploymentBuilder::class,
     )
 
     defaultImports(
-        "it.oechsler.script.language.DeploymentBuilder.Companion.deploy"
+        "it.oechsler.script.language.ResourcesBuilder.Companion.resources"
     )
 
     jvm {
