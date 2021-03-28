@@ -1,6 +1,6 @@
 package it.oechsler.script.language
 
-import it.oechsler.script.data.NamedContainerPort
+import it.oechsler.script.data.NamedSourcePort
 import it.oechsler.script.data.Port
 
 @Suppress("unused")
@@ -22,24 +22,24 @@ class PortBuilder private constructor() {
         this.ports = mutableSet.toSet()
     }
 
-    fun port(container: Int, pod: Int, name: String? = null) {
-        port(Port(name, container, pod))
+    fun port(source: Int, destination: Int, name: String? = null) {
+        port(Port(name, source, destination))
     }
 
-    fun port(containerAndPod: Int, name: String? = null) {
-        port(Port(name, containerAndPod, containerAndPod))
+    fun port(sourceAndDestination: Int, name: String? = null) {
+        port(Port(name, sourceAndDestination, sourceAndDestination))
     }
 
-    infix fun String.with(value: Int): NamedContainerPort {
-        return NamedContainerPort(this, value)
+    infix fun String.with(value: Int): NamedSourcePort {
+        return NamedSourcePort(this, value)
     }
 
-    infix fun NamedContainerPort.to(value: Int) {
+    infix fun NamedSourcePort.to(value: Int) {
         port(Port(this, value))
     }
 
     infix fun Int.to(value: Int) {
-        port(Port(container = this, pod = value))
+        port(Port(source = this, destination = value))
     }
 
     fun toPorts(): Set<Port> {

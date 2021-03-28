@@ -1,6 +1,3 @@
-import it.oechsler.script.language.ResourcesBuilder.Companion.resources
-import it.oechsler.script.language.PortBuilder
-
 fun PortBuilder.minecraft(pod: Int = 25565) =
     port(25565, pod, "minecraft")
 
@@ -25,14 +22,20 @@ resources {
             }
         }
         publish {
-            port(8080)
+            port(8081)
+            port(8082)
+            port(10)
             domains(8080) {
-                domain("www.de")
+                domain("www.oechsler.it")
                 domain("oechsler.it")
+            }
+            domains(80) {
+                domain("www.obert.dev")
+                domain("obert.dev")
             }
         }
     }
-    loadBalancer("public-edpoint") {;
+    loadBalancer("public-edpoint") {
         deployment("nginx") {
             ports {
                 8080 to 80

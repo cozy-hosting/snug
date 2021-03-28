@@ -8,7 +8,7 @@ import org.valiktor.validate
 @Serializable
 data class LoadBalancer(
     val name: String,
-    val loadBalancedDeployments: Set<LoadBalancedDeployment>,
+    val deployment: Set<LoadBalancedDeployment>,
 ) {
     init {
         validate(this) {

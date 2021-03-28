@@ -27,9 +27,6 @@ class DeploymentBuilder private constructor(val name: String) : ScriptRoot {
         this.tags = tags.toSet()
     }
 
-    fun toDeployment(): Deployment {
-        return Deployment(name, tags, replicas, containers, publish)
-    }
 
      fun container(name: String, block: ContainerBuilder.() -> Unit) {
         val mutableSet = this.containers.toMutableSet()
@@ -51,4 +48,7 @@ class DeploymentBuilder private constructor(val name: String) : ScriptRoot {
         TODO("Not yet implemented")
     }
 
+    fun toDeployment(): Deployment {
+        return Deployment(name, tags, replicas, containers, publish)
+    }
 }

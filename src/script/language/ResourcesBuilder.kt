@@ -1,11 +1,5 @@
 package it.oechsler.script.language
 
-import it.oechsler.script.data.Deployment
-import it.oechsler.script.data.LoadBalancer
-import it.oechsler.script.data.Resources
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-
 @Suppress("unused")
 class ResourcesBuilder private constructor() : ScriptRoot {
 
@@ -17,28 +11,26 @@ class ResourcesBuilder private constructor() : ScriptRoot {
 
     }
 
-    private var deployments = setOf<Deployment>()
-    private var loadBalancers = setOf<LoadBalancer>()
-
-    fun toResources(): Resources {
-        return Resources(deployments, loadBalancers)
-    }
+    private var resourceGroup = setOf<ScriptRoot>()
 
      fun deployment(name: String, block: DeploymentBuilder.() -> Unit) {
-        val mutableSet = this.deployments.toMutableSet()
-        mutableSet.add(DeploymentBuilder.deployment(name, block).toDeployment())
-        this.deployments= mutableSet
+        this.addScriptRoot(DeploymentBuilder.deployment(name, block))
      }
 
     fun loadBalancer(name: String, block: LoadBalancerBuilder.() -> Unit) {
-        val mutableSet = this.loadBalancers.toMutableSet()
-        mutableSet.add(LoadBalancerBuilder.loadBalancer(name, block).toLoadBalancer())
-        this.loadBalancers = mutableSet
+        this.addScriptRoot(LoadBalancerBuilder.loadBalancer(name, block))
+    }
+
+    private fun addScriptRoot(scriptRoot: ScriptRoot) {
+        val mutableSet = this.resourceGroup.toMutableSet()
+        mutableSet.add(scriptRoot)
+        this.resourceGroup = mutableSet
     }
 
     override fun apply() {
-        val serializer = Json { prettyPrint = true }
-        println(serializer.encodeToString(toResources()))
+        resourceGroup.forEach{
+            it.apply()
+        }
     }
 
     override fun rollback() {

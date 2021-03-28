@@ -7,7 +7,7 @@ import org.valiktor.validate
 @Serializable
 data class PublishDomains(
     var port: Int,
-    var domains: Set<Domain>
+    var hostnames: Set<String>
 ) {
     init {
         validate(this) {

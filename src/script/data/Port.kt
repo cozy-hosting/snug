@@ -9,20 +9,21 @@ import org.valiktor.validate
 @Serializable
 data class Port(
     val name: String? = null,
-    val container: Int,
-    val pod: Int
+    val source: Int,
+    val destination: Int
 ) {
-    constructor(namedContainerPort: NamedContainerPort, pod: Int): this(
-        name = namedContainerPort.name,
-        container = namedContainerPort.container,
-        pod
+    //source and destination
+    constructor(namedSourcePort: NamedSourcePort, destination: Int): this(
+        name = namedSourcePort.name,
+        source = namedSourcePort.source,
+        destination
     )
 
     init {
         validate(this) {
             validate(Port::name).isNotEmpty().isNotBlank()
-            validate(Port::container).isIn(1..65535)
-            validate(Port::pod).isIn(1..65535)
+            validate(Port::source).isIn(1..65535)
+            validate(Port::destination).isIn(1..65535)
         }
     }
 }

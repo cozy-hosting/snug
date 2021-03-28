@@ -2,8 +2,11 @@ package it.oechsler.script.language
 
 import it.oechsler.script.data.LoadBalancedDeployment
 import it.oechsler.script.data.LoadBalancer
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
-class LoadBalancerBuilder private constructor(val name: String) {
+@Suppress("unused")
+class LoadBalancerBuilder private constructor(val name: String): ScriptRoot {
 
     private var loadBalancedDeployments = setOf<LoadBalancedDeployment>()
 
@@ -23,6 +26,15 @@ class LoadBalancerBuilder private constructor(val name: String) {
 
     fun toLoadBalancer(): LoadBalancer {
         return LoadBalancer(name, loadBalancedDeployments)
+    }
+
+    override fun apply() {
+        val serializer = Json { prettyPrint = true }
+        println(serializer.encodeToString(toLoadBalancer()))
+    }
+
+    override fun rollback() {
+        TODO("Not yet implemented")
     }
 
 }

@@ -2,10 +2,12 @@ package it.oechsler.script.language
 
 import it.oechsler.script.data.Publish
 import it.oechsler.script.data.PublishDomains
-import it.oechsler.script.data.PublishPort
 
 @Suppress("unused")
 class PublishBuilder private constructor() {
+
+    private var publishDomains = setOf<PublishDomains>()
+    private var publishPorts = setOf<Int>()
 
     companion object {
 
@@ -15,9 +17,6 @@ class PublishBuilder private constructor() {
 
     }
 
-    private var publishDomains = setOf<PublishDomains>()
-    private var publishPorts = setOf<PublishPort>()
-
     fun domains(port: Int, block: PublishDomainBuilder.() -> Unit) {
         val mutableSet = this.publishDomains.toMutableSet()
         mutableSet.add(PublishDomainBuilder.domains(port, block).toPublishDomains())
@@ -26,7 +25,9 @@ class PublishBuilder private constructor() {
 
     fun port(port: Int) {
         val mutableSet = this.publishPorts.toMutableSet()
-        mutableSet.add(PublishPortBuilder.port(port).toPublishPort())
+        // create the PublishPort obj to validate port is and valid input
+        PublishPortBuilder.port(port).toPublishPort()
+        mutableSet.add(port)
         this.publishPorts = mutableSet
     }
 

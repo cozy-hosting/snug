@@ -5,7 +5,7 @@ import it.oechsler.script.data.PublishDomains
 
 @Suppress("unused")
 class PublishDomainBuilder private constructor(private val port: Int) {
-    private var domainsToPublish: Set<Domain> = emptySet()
+    private var hostnamesToPublish: Set<String> = emptySet()
 
     companion object {
 
@@ -16,15 +16,14 @@ class PublishDomainBuilder private constructor(private val port: Int) {
     }
 
     fun domain(domain: String) {
-        val mutableSet = this.domainsToPublish.toMutableSet()
-        mutableSet.add(Domain(domain))
-        this.domainsToPublish = mutableSet.toSet()
+        val mutableSet = this.hostnamesToPublish.toMutableSet()
+        // validate hostname, because the whole obj is not needed in the JSON Payload
+        mutableSet.add(Domain(domain).host)
+        this.hostnamesToPublish = mutableSet.toSet()
     }
-
-
+    
     fun toPublishDomains(): PublishDomains {
-
-        return PublishDomains(this.port, this.domainsToPublish)
+        return PublishDomains(this.port, this.hostnamesToPublish)
     }
 
 }

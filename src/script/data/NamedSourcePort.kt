@@ -5,14 +5,14 @@ import org.valiktor.functions.isNotBlank
 import org.valiktor.functions.isNotEmpty
 import org.valiktor.validate
 
-data class NamedContainerPort(
+data class NamedSourcePort(
     val name: String,
-    val container: Int
+    val source: Int
 ) {
     init {
         validate(this) {
-            validate(NamedContainerPort::name).isNotEmpty().isNotBlank()
-            validate(NamedContainerPort::container).isIn(1..65535)
+            validate(NamedSourcePort::name).isNotEmpty().isNotBlank()
+            validate(NamedSourcePort::source).isIn(1..65535)
         }
     }
 }
