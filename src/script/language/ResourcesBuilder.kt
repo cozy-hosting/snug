@@ -13,6 +13,10 @@ class ResourcesBuilder private constructor() : ScriptRoot {
 
     private var resourceGroup = setOf<ScriptRoot>()
 
+    fun volume(name: String, block: VolumeBuilder.() -> Unit) {
+        addScriptRoot(VolumeBuilder.volume(name, block))
+    }
+
     fun deployment(name: String, block: DeploymentBuilder.() -> Unit) {
         this.addScriptRoot(DeploymentBuilder.deployment(name, block))
     }

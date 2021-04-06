@@ -6,7 +6,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 @Suppress("unused")
-class StorageBuilder constructor(val name: String, private val storageClass: String): ScriptRoot {
+open class StorageBuilder constructor(val name: String, private val storageClass: String): ScriptRoot {
 
     lateinit var size: Size
 

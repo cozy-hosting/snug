@@ -2,12 +2,12 @@ fun PortBuilder.minecraft(pod: Int = 25565) =
     port(25565, pod, "minecraft")
 
 resources {
-    storage("test-1", "test-storage-class") {
-        size = 1.gib()
+    volume("test-1") {
+        size = 1.gb()
     }
 
-    storage("test-2", "test-storage-class") {
-        size = 1.5.gib()
+    volume("test-2") {
+        size = 1.5.gb()
     }
 
     deployment("nginx") {
@@ -29,6 +29,7 @@ resources {
                 9000 to 8081
             }
         }
+
         publish {
             port(8081)
             port(8082)

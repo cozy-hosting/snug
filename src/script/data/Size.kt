@@ -7,8 +7,7 @@ import kotlin.math.roundToInt
 
 @Serializable
 data class Size(
-    val quantity: Double,
-    val unit: SizeUnit
+    val quantity: Double
 ) {
     init {
         validate(this) {
@@ -22,6 +21,6 @@ data class Size(
             quantity.roundToInt().toDouble() -> quantity.roundToInt()
             else -> quantity
         }
-        return "${quantityString}${unit.value}"
+        return "${quantityString}Gi"
     }
 }
