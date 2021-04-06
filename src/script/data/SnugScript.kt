@@ -17,22 +17,29 @@ abstract class SnugScript
 
 object SnugScriptCompilationConfiguration : ScriptCompilationConfiguration({
     defaultImports(
-        // deployments
+        // Storage
+        StorageBuilder::class,
+        // Deployments
         DeploymentBuilder::class,
         ContainerBuilder::class,
-        PortBuilder::class,
         ImageBuilder::class,
+        PortBuilder::class,
         PublishBuilder::class,
         PublishBuilder::class,
         PublishDomainBuilder::class,
         PublishPortBuilder::class,
-        // loadBalancers
+        // LoadBalancers
         LoadBalancerBuilder::class,
         LoadBalancedDeploymentBuilder::class,
     )
 
     defaultImports(
-        "it.oechsler.script.language.ResourcesBuilder.Companion.resources"
+        // Syntax constructors
+        "it.oechsler.script.language.DeploymentBuilder.Companion.deployment",
+        "it.oechsler.script.language.ResourcesBuilder.Companion.resources",
+        // Extension functions
+        "it.oechsler.script.extensions.gib",
+        "it.oechsler.script.extensions.gb"
     )
 
     jvm {

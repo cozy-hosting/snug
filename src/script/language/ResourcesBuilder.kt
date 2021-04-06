@@ -13,9 +13,9 @@ class ResourcesBuilder private constructor() : ScriptRoot {
 
     private var resourceGroup = setOf<ScriptRoot>()
 
-     fun deployment(name: String, block: DeploymentBuilder.() -> Unit) {
+    fun deployment(name: String, block: DeploymentBuilder.() -> Unit) {
         this.addScriptRoot(DeploymentBuilder.deployment(name, block))
-     }
+    }
 
     fun loadBalancer(name: String, block: LoadBalancerBuilder.() -> Unit) {
         this.addScriptRoot(LoadBalancerBuilder.loadBalancer(name, block))

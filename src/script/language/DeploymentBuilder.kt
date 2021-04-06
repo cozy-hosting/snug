@@ -39,6 +39,10 @@ class DeploymentBuilder private constructor(val name: String) : ScriptRoot {
         publish = PublishBuilder.publish(block).toPublish()
     }
 
+    fun toDeployment(): Deployment {
+        return Deployment(name, tags, replicas, containers, publish)
+    }
+
     override fun apply() {
         val serializer = Json { prettyPrint = true }
         println(serializer.encodeToString(toDeployment()))
@@ -46,9 +50,5 @@ class DeploymentBuilder private constructor(val name: String) : ScriptRoot {
 
     override fun rollback() {
         TODO("Not yet implemented")
-    }
-
-    fun toDeployment(): Deployment {
-        return Deployment(name, tags, replicas, containers, publish)
     }
 }

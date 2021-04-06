@@ -2,6 +2,14 @@ fun PortBuilder.minecraft(pod: Int = 25565) =
     port(25565, pod, "minecraft")
 
 resources {
+    storage("test-1", "test-storage-class") {
+        size = 1.gib()
+    }
+
+    storage("test-2", "test-storage-class") {
+        size = 1.5.gib()
+    }
+
     deployment("nginx") {
         tags("personal", "website")
         replicas = 3
@@ -35,6 +43,7 @@ resources {
             }
         }
     }
+
     loadBalancer("public-edpoint") {
         deployment("nginx") {
             ports {
