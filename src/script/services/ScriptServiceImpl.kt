@@ -1,5 +1,6 @@
 package it.oechsler.script.services
 
+import it.oechsler.script.SnugScript
 import it.oechsler.script.data.*
 import it.oechsler.script.language.ScriptRoot
 import java.nio.file.Files
@@ -36,7 +37,7 @@ class ScriptServiceImpl : ScriptService {
         val result = host.evalWithTemplate<SnugScript>(script.toScriptSource())
 
         val errors = result.reports
-            .filter { it.severity.ordinal <= ScriptDiagnostic.Severity.ERROR.ordinal }
+            .filter { it.severity == ScriptDiagnostic.Severity.ERROR }
             .toList()
         if (errors.isNotEmpty()) {
             throw ScriptCompileException("Script did not compile successfully", errors)

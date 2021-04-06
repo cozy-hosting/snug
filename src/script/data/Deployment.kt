@@ -12,6 +12,7 @@ data class Deployment(
     val tags: Set<String>,
     val replicas: Int,
     val containers: Set<Container>,
+    val mounts: Set<Mount>,
     val publish: Publish,
 ) {
     init {
