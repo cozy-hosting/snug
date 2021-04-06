@@ -30,6 +30,12 @@ resources {
             }
         }
 
+        mounts {
+            "test-1" to path(root() / "storage") with everyone()
+            "some-config" from config to path(root() / "config.yml") with default()
+            "some-secret" from secret to path(root() / "secret.txt") with permission(600)
+        }
+
         publish {
             port(8081)
             port(8082)

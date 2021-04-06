@@ -1,5 +1,6 @@
 package it.oechsler.script.services
 
+import it.oechsler.script.SnugScript
 import it.oechsler.script.data.*
 import it.oechsler.script.language.ScriptRoot
 import java.nio.file.Files
