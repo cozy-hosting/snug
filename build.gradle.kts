@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+// Import values from gradle.properties
 val kotlinVersion: String by project
 
 val koinVersion: String by project
@@ -9,7 +10,8 @@ val cliktVersion: String by project
 val serializationVersion: String by project
 val ktorVersion: String by project
 
-val junitVersion: String by project
+val kotestVersion: String by project
+// END: Import values from gradle.properties
 
 plugins {
     kotlin("jvm") version "1.4.31"
@@ -40,11 +42,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
+    // END: Dependencies used for building and running the application
 
     // Dependencies used for testing the application
-    testImplementation(kotlin("test-junit5"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+    testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
+    testImplementation("io.kotest:kotest-property:$kotestVersion")
+    // END: Dependencies used for testing the application
 }
 
 tasks.withType<Test> {
