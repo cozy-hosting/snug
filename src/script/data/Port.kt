@@ -12,10 +12,10 @@ data class Port(
     val source: Int,
     val destination: Int
 ) {
-    //source and destination
-    constructor(namedSourcePort: NamedSourcePort, destination: Int): this(
+
+    constructor(namedSourcePort: NameAndSourcePort, destination: Int): this(
         name = namedSourcePort.name,
-        source = namedSourcePort.source,
+        source = namedSourcePort.sourcePort,
         destination
     )
 
@@ -26,4 +26,5 @@ data class Port(
             validate(Port::destination).isIn(1..65535)
         }
     }
+
 }
