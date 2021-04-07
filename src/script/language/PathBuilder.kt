@@ -9,7 +9,7 @@ class PathBuilder private constructor(private val destination: Path) {
 
     companion object {
 
-        fun root() = Path()
+        val root = Path()
 
         fun path(destination: Path): PathBuilder {
             return PathBuilder(destination)

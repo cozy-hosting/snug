@@ -7,9 +7,8 @@ class PermissionBuilder private constructor(private val permission: Permission) 
 
     companion object {
 
-        fun everyone() = permission(777)
-
-        fun default() = permission(755)
+        val everyone = permission(777)
+        val default = permission(755)
 
         fun permission(all: Int): PermissionBuilder {
             return permission(Permission(all))
