@@ -1,6 +1,6 @@
 package it.oechsler.script.language
 
-import it.oechsler.script.data.NamedSourcePort
+import it.oechsler.script.data.NameAndSourcePort
 import it.oechsler.script.data.Port
 
 @Suppress("unused")
@@ -22,25 +22,21 @@ class PortBuilder private constructor() {
         this.ports = mutableSet.toSet()
     }
 
-    fun port(source: Int, destination: Int, name: String? = null) {
-        port(Port(name, source, destination))
+    // Syntax for binding a port with name
+    infix fun String.from(sourcePort: Int): NameAndSourcePort {
+        return NameAndSourcePort(this, sourcePort)
     }
 
-    fun port(sourceAndDestination: Int, name: String? = null) {
-        port(Port(name, sourceAndDestination, sourceAndDestination))
+    infix fun NameAndSourcePort.to(destinationPort: Int) {
+        port(Port(this, destinationPort))
     }
+    // END: Syntax for binding a port with name
 
-    infix fun String.with(value: Int): NamedSourcePort {
-        return NamedSourcePort(this, value)
+    // Syntax for binding a port without a name
+    infix fun Int.to(destinationPort: Int) {
+        port(Port(source = this, destination = destinationPort))
     }
-
-    infix fun NamedSourcePort.to(value: Int) {
-        port(Port(this, value))
-    }
-
-    infix fun Int.to(value: Int) {
-        port(Port(source = this, destination = value))
-    }
+    // END: Syntax for binding a port without a name
 
     fun toPorts(): Set<Port> {
         return this.ports

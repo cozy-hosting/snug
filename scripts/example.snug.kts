@@ -1,6 +1,3 @@
-fun PortBuilder.minecraft(pod: Int = 25565) =
-    port(25565, pod, "minecraft")
-
 resources {
     volume("test-1") {
         size = 1.gb()
@@ -18,14 +15,7 @@ resources {
             image("nginx", "latest")
 
             ports {
-                minecraft()
-
-                port(21, 5642, "ftp")
-                port(443, 4043)
-                port(45, "something")
-                port(22)
-                // Shorthand syntax
-                "http" with 80 to 8080
+                "http" from 80 to 8080
                 9000 to 8081
             }
         }
