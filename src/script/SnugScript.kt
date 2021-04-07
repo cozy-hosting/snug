@@ -1,4 +1,4 @@
-package it.oechsler.script.data
+package it.oechsler.script
 
 import it.oechsler.script.language.*
 import kotlin.script.experimental.annotations.KotlinScript
@@ -17,22 +17,37 @@ abstract class SnugScript
 
 object SnugScriptCompilationConfiguration : ScriptCompilationConfiguration({
     defaultImports(
-        // deployments
+        // Storage
+        StorageBuilder::class,
+        VolumeBuilder::class,
+        // Deployments
         DeploymentBuilder::class,
         ContainerBuilder::class,
-        PortBuilder::class,
         ImageBuilder::class,
+        PortBuilder::class,
         PublishBuilder::class,
         PublishBuilder::class,
         PublishDomainBuilder::class,
         PublishPortBuilder::class,
-        // loadBalancers
+        MountBuilder::class,
+        // LoadBalancers
         LoadBalancerBuilder::class,
         LoadBalancedDeploymentBuilder::class,
     )
 
     defaultImports(
-        "it.oechsler.script.language.ResourcesBuilder.Companion.resources"
+        // Syntax constructors
+        "it.oechsler.script.language.ResourcesBuilder.Companion.resources",
+        "it.oechsler.script.language.VolumeBuilder.Companion.volume",
+        "it.oechsler.script.language.DeploymentBuilder.Companion.deployment",
+        "it.oechsler.script.language.PathBuilder.Companion.path",
+        "it.oechsler.script.language.PathBuilder.Companion.root",
+        "it.oechsler.script.language.PermissionBuilder.Companion.permission",
+        "it.oechsler.script.language.PermissionBuilder.Companion.default",
+        "it.oechsler.script.language.PermissionBuilder.Companion.everyone",
+        // Extension functions
+        "it.oechsler.script.extensions.gb",
+        "it.oechsler.script.extensions.mb"
     )
 
     jvm {

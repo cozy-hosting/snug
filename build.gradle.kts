@@ -14,8 +14,8 @@ val kotestVersion: String by project
 // END: Import values from gradle.properties
 
 plugins {
-    kotlin("jvm") version "1.4.31"
-    kotlin("plugin.serialization") version "1.4.31"
+    kotlin("jvm") version "1.4.32"
+    kotlin("plugin.serialization") version "1.4.32"
 
     application
 }
@@ -57,11 +57,11 @@ tasks.withType<Test> {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 application {
-    mainClassName = "it.oechsler.MainKt"
+    mainClass.set("it.oechsler.MainKt")
 }
 
 kotlin.sourceSets["main"].kotlin.srcDirs("src")
