@@ -1,7 +1,7 @@
 class InvalidTestValues {
     companion object {
-        var name = " "
-        var portNumber = 65536
-        var hostnames = setOf("www", " ")
+        const val name = " "
+        const val portNumber = 65536
+        val hostnames = setOf("www", " ")
     }
 }
