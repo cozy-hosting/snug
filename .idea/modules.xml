@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/_cli.test.iml" filepath="$PROJECT_DIR$/.idea/modules/_cli.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/cli.iml" filepath="$PROJECT_DIR$/.idea/cli.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cli.main.iml" filepath="$PROJECT_DIR$/.idea/modules/cli.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cli.test.iml" filepath="$PROJECT_DIR$/.idea/modules/cli.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/it.oechsler.cli.test.iml" filepath="$PROJECT_DIR$/.idea/modules/it.oechsler.cli.test.iml" />
     </modules>
   </component>

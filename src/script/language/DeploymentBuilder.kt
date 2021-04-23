@@ -41,7 +41,6 @@ class DeploymentBuilder private constructor(val name: String) : ScriptRoot {
     }
 
     fun publish(block: PublishBuilder.() -> Unit) {
-        //publish = Publish(setOf(PublishPort(8080)))
         publish = PublishBuilder.publish(block).toPublish()
     }
 
