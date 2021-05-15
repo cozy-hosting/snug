@@ -1,0 +1,495 @@
+@startuml
+
+class "" {
+  invoke() : CommandBus
+}
+
+class "$serializer" {
+  childSerializers() : kotlinx.serialization.KSerializer<?>[]
+  deserialize(Decoder) : Object
+  deserialize(Decoder) : Config
+  serialize(Encoder, Config)
+  serialize(Encoder, Object)
+  typeParametersSerializers() : kotlinx.serialization.KSerializer<?>[]
+}
+
+interface "ApiService" {
+  resource(String) : Lazy<Url>
+}
+
+class "ApiServiceImpl" {
+  rootUrl : String
+  resource(String) : Lazy<Url>
+}
+
+class "ApplyCommand" {
+  scriptService$delegate : Lazy
+  scriptPath$delegate : ReadOnlyProperty
+  run()
+}
+
+class "AuthCommand" {
+  authCommandBus$delegate : Lazy
+  token$delegate : ReadOnlyProperty
+  run()
+}
+
+enum "AuthCommandBus"
+
+class "AuthConfig" {
+  authToken : AuthToken
+  component1() : AuthToken
+  copy(AuthToken) : AuthConfig
+}
+
+class "AuthToken" {
+  token : String
+  component1() : String
+  copy(String) : AuthToken
+}
+
+class "Companion" {
+  serializer() : KSerializer<Config>
+}
+
+class "Config" {
+  authConfig : AuthConfig
+  component1() : AuthConfig
+  copy(AuthConfig) : Config
+}
+
+interface "ConfigRepository" {
+  create(Config)
+  delete()
+  retrieve() : Config
+}
+
+class "ConfigRepositoryImpl" {
+  configPath : Path
+  configFile : File
+  serializer : Json
+  create(Config)
+  delete()
+  retrieve() : Config
+}
+
+class "Container" {
+  name : String
+  image : Image
+  ports : Set<Port>
+  component1() : String
+  component2() : Image
+  component3() : Set<Port>
+  copy(String, Image, Set<Port>) : Container
+}
+
+class "ContainerBuilder" {
+  image : Image
+  ports : Set<Port>
+  name : String
+  image(String, String)
+  ports(Function1<? super it.oechsler.script.language.PortBuilder, Unit>)
+  toContainer() : Container
+}
+
+class "Deployment" {
+  name : String
+  tags : Set<String>
+  replicas : int
+  containers : Set<Container>
+  mounts : Set<Mount>
+  publish : Publish
+  component1() : String
+  component2() : Set<String>
+  component3() : int
+  component4() : Set<Container>
+  component5() : Set<Mount>
+  component6() : Publish
+  copy(String, Set<String>, int, Set<Container>, Set<Mount>, Publish) : Deployment
+}
+
+class "DeploymentBuilder" {
+  replicas$delegate : ReadWriteProperty
+  tags : Set<String>
+  containers : Set<Container>
+  mounts : Set<Mount>
+  publish : Publish
+  name : String
+  apply()
+  container(String, Function1<? super it.oechsler.script.language.ContainerBuilder, Unit>)
+  mounts(Function1<? super it.oechsler.script.language.MountBuilder, Unit>)
+  publish(Function1<? super it.oechsler.script.language.PublishBuilder, Unit>)
+  rollback()
+  tags(String[])
+  toDeployment() : Deployment
+}
+
+class "Domain" {
+  host : String
+  component1() : String
+  copy(String) : Domain
+}
+
+class "Image" {
+  name : String
+  tag : String
+  component1() : String
+  component2() : String
+  copy(String, String) : Image
+}
+
+class "ImageBuilder" {
+  name : String
+  tag : String
+  toImage() : Image
+}
+
+class "LoadBalancedDeployment" {
+  name : String
+  ports : Set<Port>
+  component1() : String
+  component2() : Set<Port>
+  copy(String, Set<Port>) : LoadBalancedDeployment
+}
+
+class "LoadBalancedDeploymentBuilder" {
+  ports : Set<Port>
+  name : String
+  ports(Function1<? super it.oechsler.script.language.PortBuilder, Unit>)
+  toLoadBalancedDeployment() : LoadBalancedDeployment
+}
+
+class "LoadBalancer" {
+  name : String
+  deployment : Set<LoadBalancedDeployment>
+  component1() : String
+  component2() : Set<LoadBalancedDeployment>
+  copy(String, Set<LoadBalancedDeployment>) : LoadBalancer
+}
+
+class "LoadBalancerBuilder" {
+  loadBalancedDeployments : Set<LoadBalancedDeployment>
+  name : String
+  apply()
+  deployment(String, Function1<? super it.oechsler.script.language.LoadBalancedDeploymentBuilder, Unit>)
+  rollback()
+  toLoadBalancer() : LoadBalancer
+}
+
+class "MainCommand"
+
+class "MainKt"
+
+class "ModuleKt"
+
+class "Mount" {
+  name : String
+  type : String
+  path : String
+  permission : String
+  component1() : String
+  component2() : String
+  component3() : String
+  component4() : String
+  copy(String, String, String, String) : Mount
+}
+
+class "MountBuilder" {
+  mounts : Set<Mount>
+  volume : MountType
+  config : MountType
+  secret : MountType
+  from(String, MountType) : StorageWithType
+  to(String, PathBuilder) : VolumeWithPath
+  to(StorageWithType, PathBuilder) : StorageWithTypeAndPath
+  toMounts() : Set<Mount>
+  with(StorageWithTypeAndPath, PermissionBuilder)
+  with(VolumeWithPath, PermissionBuilder)
+}
+
+enum "MountType" {
+  VOLUME
+  CONFIG
+  SECRET
+  value
+}
+
+class "NameAndSourcePort" {
+  name : String
+  sourcePort : int
+  component1() : String
+  component2() : int
+  copy(String, int) : NameAndSourcePort
+}
+
+class "Path" {
+  string : String
+  component1() : String
+  copy(String) : Path
+  div(String) : Path
+}
+
+class "PathBuilder" {
+  destination : Path
+}
+
+class "Permission" {
+  user : int
+  group : int
+  everyone : int
+  component1() : int
+  component2() : int
+  component3() : int
+  copy(int, int, int) : Permission
+}
+
+class "PermissionBuilder" {
+  permission : Permission
+}
+
+class "Port" {
+  name : String
+  source : int
+  destination : int
+  component1() : String
+  component2() : int
+  component3() : int
+  copy(String, int, int) : Port
+}
+
+class "PortBuilder" {
+  ports : Set<Port>
+  from(String, int) : NameAndSourcePort
+  to(int, int)
+  to(NameAndSourcePort, int)
+  toPorts() : Set<Port>
+}
+
+class "Publish" {
+  ports : Set<Integer>
+  domains : Set<PublishDomains>
+  component1() : Set<Integer>
+  component2() : Set<PublishDomains>
+  copy(Set<Integer>, Set<PublishDomains>) : Publish
+}
+
+class "PublishBuilder" {
+  publishDomains : Set<PublishDomains>
+  publishPorts : Set<Integer>
+  domains(int, Function1<? super it.oechsler.script.language.PublishDomainBuilder, Unit>)
+  port(int)
+  toPublish() : Publish
+}
+
+class "PublishDomainBuilder" {
+  hostnamesToPublish : Set<String>
+  port : int
+  domain(String)
+  toPublishDomains() : PublishDomains
+}
+
+class "PublishDomains" {
+  port : int
+  hostnames : Set<String>
+  component1() : int
+  component2() : Set<String>
+  copy(int, Set<String>) : PublishDomains
+}
+
+class "PublishPort" {
+  port : int
+  component1() : int
+  copy(int) : PublishPort
+}
+
+class "PublishPortBuilder" {
+  port : int
+  toPublishPort() : PublishPort
+}
+
+class "Resources" {
+  deployments : Set<Deployment>
+  loadBalancers : Set<LoadBalancer>
+  component1() : Set<Deployment>
+  component2() : Set<LoadBalancer>
+  copy(Set<Deployment>, Set<LoadBalancer>) : Resources
+}
+
+class "ResourcesBuilder" {
+  resourceGroup : Set<? extends it.oechsler.script.language.Script>
+  apply()
+  deployment(String, Function1<? super it.oechsler.script.language.DeploymentBuilder, Unit>)
+  loadBalancer(String, Function1<? super it.oechsler.script.language.LoadBalancerBuilder, Unit>)
+  rollback()
+  volume(String, Function1<? super it.oechsler.script.language.VolumeBuilder, Unit>)
+}
+
+class "RollbackCommand" {
+  scriptService$delegate : Lazy
+  scriptPath$delegate : ReadOnlyProperty
+  run()
+}
+
+class "SaveAuthConfigCommand" {
+  authConfig : AuthConfig
+}
+
+class "SaveAuthConfigCommandHandler" {
+  configRepository$delegate : Lazy
+  handle(SaveAuthConfigCommand)
+  handle(Command)
+}
+
+interface "Script" {
+  apply()
+  rollback()
+}
+
+class "ScriptCompileException" {
+  message : String
+  reports : List<ScriptDiagnostic>
+}
+
+class "ScriptRuntimeException" {
+  message : String
+}
+
+interface "ScriptService" {
+  loadFromPath(Path, KClass<T>) : T
+  loadFromString(String, KClass<T>) : T
+}
+
+class "ScriptServiceImpl" {
+  loadFromPath(Path, KClass<T>) : T
+  loadFromString(String, KClass<T>) : T
+}
+
+class "Size" {
+  quantity : double
+  component1() : double
+  copy(double) : Size
+}
+
+class "SizeExtensionsKt"
+
+abstract class "SnugScript"
+
+class "SnugScriptCompilationConfiguration"
+
+class "SnugScriptEvaluationConfiguration"
+
+class "Storage" {
+  name : String
+  size : String
+  storageClass : String
+  component1() : String
+  component2() : String
+  component3() : String
+  copy(String, String, String) : Storage
+}
+
+class "StorageBuilder" {
+  size : Size
+  name : String
+  storageClass : StorageClass
+  apply()
+  rollback()
+  toStorage() : Storage
+}
+
+enum "StorageClass" {
+  DO_BLOCK_STORAGE
+  value
+}
+
+class "StorageWithType" {
+  name : String
+  type : MountType
+  component1() : String
+  component2() : MountType
+  copy(String, MountType) : StorageWithType
+}
+
+class "StorageWithTypeAndPath" {
+  storageWithType : StorageWithType
+  path : PathBuilder
+  component1() : StorageWithType
+  component2() : PathBuilder
+  copy(StorageWithType, PathBuilder) : StorageWithTypeAndPath
+}
+
+class "VolumeBuilder"
+
+class "VolumeWithPath" {
+  name : String
+  path : PathBuilder
+  component1() : String
+  component2() : PathBuilder
+  copy(String, PathBuilder) : VolumeWithPath
+}
+
+"$serializer" --> "Config" : use
+"ApiService" <|-- "ApiServiceImpl"
+"AuthConfig" --> "AuthToken" : authToken
+"Companion" --> "Config" : use
+"Config" --> "AuthConfig" : authConfig
+"ConfigRepository" --> "Config" : use
+"ConfigRepository" <|-- "ConfigRepositoryImpl"
+"ConfigRepositoryImpl" --> "Config" : use
+"ContainerBuilder" --> "Container" : use
+"ContainerBuilder" --> "Image" : image
+"ContainerBuilder" --> "*" "Port" : ports
+"Container" --> "Image" : image
+"Container" --> "*" "Port" : ports
+"DeploymentBuilder" --> "*" "Container" : containers
+"DeploymentBuilder" --> "Deployment" : use
+"DeploymentBuilder" --> "*" "Mount" : mounts
+"DeploymentBuilder" --> "Publish" : publish
+"Deployment" --> "*" "Container" : containers
+"Deployment" --> "*" "Mount" : mounts
+"Deployment" --> "Publish" : publish
+"ImageBuilder" --> "Image" : use
+"LoadBalancedDeploymentBuilder" --> "LoadBalancedDeployment" : use
+"LoadBalancedDeploymentBuilder" --> "*" "Port" : ports
+"LoadBalancedDeployment" --> "*" "Port" : ports
+"LoadBalancerBuilder" --> "*" "LoadBalancedDeployment" : loadBalancedDeployments
+"LoadBalancerBuilder" --> "LoadBalancer" : use
+"LoadBalancer" --> "*" "LoadBalancedDeployment" : deployment
+"MountBuilder" --> "*" "Mount" : mounts
+"MountBuilder" --> "MountType" : volume/config/secret
+"MountBuilder" --> "PathBuilder" : use
+"MountBuilder" --> "PermissionBuilder" : use
+"MountBuilder" --> "StorageWithType" : use
+"MountBuilder" --> "StorageWithTypeAndPath" : use
+"MountBuilder" --> "VolumeWithPath" : use
+"PathBuilder" --> "Path" : destination
+"PermissionBuilder" --> "Permission" : permission
+"PortBuilder" --> "NameAndSourcePort" : use
+"PortBuilder" --> "*" "Port" : ports
+"PublishBuilder" --> "Publish" : use
+"PublishBuilder" --> "*" "PublishDomains" : publishDomains
+"PublishDomainBuilder" --> "PublishDomains" : use
+"PublishPortBuilder" --> "PublishPort" : use
+"Publish" --> "*" "PublishDomains" : domains
+"Resources" --> "*" "Deployment" : deployments
+"Resources" --> "*" "LoadBalancer" : loadBalancers
+"SaveAuthConfigCommand" --> "AuthConfig" : authConfig
+"SaveAuthConfigCommandHandler" --> "SaveAuthConfigCommand" : use
+"Script" <|-- "DeploymentBuilder"
+"Script" <|-- "LoadBalancerBuilder"
+"Script" <|-- "ResourcesBuilder"
+"ScriptServiceImpl" --> "Script" : use
+"ScriptService" --> "Script" : use
+"ScriptService" <|-- "ScriptServiceImpl"
+"Script" <|-- "StorageBuilder"
+"Script" <|-- "VolumeBuilder"
+"StorageBuilder" --> "Size" : size
+"StorageBuilder" --> "Storage" : use
+"StorageBuilder" --> "StorageClass" : storageClass
+"StorageBuilder" <|-- "VolumeBuilder"
+"StorageWithTypeAndPath" --> "PathBuilder" : path
+"StorageWithTypeAndPath" --> "StorageWithType" : storageWithType
+"StorageWithType" --> "MountType" : type
+"VolumeWithPath" --> "PathBuilder" : path
+
+@enduml

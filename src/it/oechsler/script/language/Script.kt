@@ -1,6 +1,6 @@
 package it.oechsler.script.language
 
-interface ScriptRoot {
+interface Script {
 
     fun apply()
 

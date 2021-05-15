@@ -9,7 +9,7 @@ import kotlinx.serialization.json.Json
 import kotlin.properties.Delegates
 
 @Suppress("unused")
-class DeploymentBuilder private constructor(val name: String) : ScriptRoot {
+class DeploymentBuilder private constructor(val name: String) : Script {
 
     companion object {
 
