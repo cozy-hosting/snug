@@ -37,17 +37,17 @@ object SnugScriptCompilationConfiguration : ScriptCompilationConfiguration({
 
     defaultImports(
         // Syntax constructors
-        "it.oechsler.script.language.ResourcesBuilder.Companion.resources",
-        "it.oechsler.script.language.VolumeBuilder.Companion.volume",
-        "it.oechsler.script.language.DeploymentBuilder.Companion.deployment",
-        "it.oechsler.script.language.PathBuilder.Companion.path",
-        "it.oechsler.script.language.PathBuilder.Companion.root",
-        "it.oechsler.script.language.PermissionBuilder.Companion.permission",
-        "it.oechsler.script.language.PermissionBuilder.Companion.default",
-        "it.oechsler.script.language.PermissionBuilder.Companion.everyone",
+        "it.oechsler.it.oechsler.script.language.ResourcesBuilder.Companion.resources",
+        "it.oechsler.it.oechsler.script.language.VolumeBuilder.Companion.volume",
+        "it.oechsler.it.oechsler.script.language.DeploymentBuilder.Companion.deployment",
+        "it.oechsler.it.oechsler.script.language.PathBuilder.Companion.path",
+        "it.oechsler.it.oechsler.script.language.PathBuilder.Companion.root",
+        "it.oechsler.it.oechsler.script.language.PermissionBuilder.Companion.permission",
+        "it.oechsler.it.oechsler.script.language.PermissionBuilder.Companion.default",
+        "it.oechsler.it.oechsler.script.language.PermissionBuilder.Companion.everyone",
         // Extension functions
-        "it.oechsler.script.extensions.gb",
-        "it.oechsler.script.extensions.mb"
+        "it.oechsler.it.oechsler.script.extensions.gb",
+        "it.oechsler.it.oechsler.script.extensions.mb"
     )
 
     jvm {

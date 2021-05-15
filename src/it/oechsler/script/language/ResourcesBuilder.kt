@@ -1,7 +1,7 @@
 package it.oechsler.script.language
 
 @Suppress("unused")
-class ResourcesBuilder private constructor() : ScriptRoot {
+class ResourcesBuilder private constructor() : Script {
 
     companion object {
 
@@ -11,7 +11,7 @@ class ResourcesBuilder private constructor() : ScriptRoot {
 
     }
 
-    private var resourceGroup = setOf<ScriptRoot>()
+    private var resourceGroup = setOf<Script>()
 
     fun volume(name: String, block: VolumeBuilder.() -> Unit) {
         addScriptRoot(VolumeBuilder.volume(name, block))
@@ -25,9 +25,9 @@ class ResourcesBuilder private constructor() : ScriptRoot {
         this.addScriptRoot(LoadBalancerBuilder.loadBalancer(name, block))
     }
 
-    private fun addScriptRoot(scriptRoot: ScriptRoot) {
+    private fun addScriptRoot(script: Script) {
         val mutableSet = this.resourceGroup.toMutableSet()
-        mutableSet.add(scriptRoot)
+        mutableSet.add(script)
         this.resourceGroup = mutableSet
     }
 

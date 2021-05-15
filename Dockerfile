@@ -1,9 +1,10 @@
-FROM gradle:6.7.1-jdk15 AS build
+FROM gradle:7.0.0-jdk16 AS build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
-RUN gradle distTar
+RUN gradle test && \
+    gradle distTar
 
-FROM mcr.microsoft.com/java/jre:15-zulu-alpine
+FROM openjdk:16-slim
 COPY --from=build /home/gradle/src/build/distributions/*.tar /home/snug/cli.tar
 RUN tar xfv /home/snug/cli.tar --directory=/home/snug/ && \
     rm /home/snug/cli.tar

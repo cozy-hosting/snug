@@ -6,13 +6,11 @@ import com.trendyol.kediatr.CommandBus
 import it.oechsler.identity.AuthCommandBus
 import it.oechsler.identity.data.AuthConfig
 import it.oechsler.identity.data.AuthToken
-import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.qualifier.named
 
-@KoinApiExtension
-class AuthCommand : CliktCommand(name = "auth", help = "Authenticate with the cozy api", printHelpOnEmptyArgs = true),
+class AuthCommand : CliktCommand(name = "auth", help = "Authenticate with the cozy it.oechsler.api", printHelpOnEmptyArgs = true),
     KoinComponent {
 
     private val authCommandBus by inject<CommandBus>(named<AuthCommandBus>())
@@ -25,7 +23,7 @@ class AuthCommand : CliktCommand(name = "auth", help = "Authenticate with the co
         }
 
         // Other options might be possible from here,
-        // for example OAuth with the api in a web browser
+        // for example OAuth with the it.oechsler.api in a web browser
     }
 
     private fun saveConfig(token: String) {
