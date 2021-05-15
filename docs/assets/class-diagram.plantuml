@@ -1,6 +1,6 @@
 @startuml
 
-class "" {
+class "$commandBus" {
   invoke() : CommandBus
 }
 
@@ -282,7 +282,7 @@ class "PublishBuilder" {
 }
 
 class "PublishDomainBuilder" {
-  hostnamesToPublish : Set<String>
+  hostnamesToPublish : Set<Domain>
   port : int
   domain(String)
   toPublishDomains() : PublishDomains
@@ -468,6 +468,7 @@ class "VolumeWithPath" {
 "PortBuilder" --> "*" "Port" : ports
 "PublishBuilder" --> "Publish" : use
 "PublishBuilder" --> "*" "PublishDomains" : publishDomains
+"PublishDomainBuilder" --> "*" "Domain" : hostnamesToPublish
 "PublishDomainBuilder" --> "PublishDomains" : use
 "PublishPortBuilder" --> "PublishPort" : use
 "Publish" --> "*" "PublishDomains" : domains
