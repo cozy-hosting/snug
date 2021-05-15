@@ -10,7 +10,7 @@ import it.oechsler.script.language.Script
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class ApplyCommand: CliktCommand(name = "apply", help = "Evaluate and apply a resource it.oechsler.script"), KoinComponent {
+class ApplyCommand: CliktCommand(name = "apply", help = "Evaluate and apply a resource script"), KoinComponent {
 
     private val scriptService: ScriptService by inject()
 
