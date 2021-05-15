@@ -6,7 +6,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 @Suppress("unused")
-class LoadBalancerBuilder private constructor(val name: String): ScriptRoot {
+class LoadBalancerBuilder private constructor(val name: String): Script {
 
     private var loadBalancedDeployments = setOf<LoadBalancedDeployment>()
 

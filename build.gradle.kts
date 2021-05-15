@@ -11,11 +11,14 @@ val serializationVersion: String by project
 val ktorVersion: String by project
 
 val kotestVersion: String by project
+val kotestKoinVersion: String by project
 // END: Import values from gradle.properties
 
 plugins {
     kotlin("jvm") version "1.4.32"
     kotlin("plugin.serialization") version "1.4.32"
+
+    id("com.github.roroche.plantuml") version "1.0.2"
 
     application
 }
@@ -25,12 +28,11 @@ version = "0.0.1"
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 dependencies {
     // Dependencies used for building and running the application
-    implementation("org.koin:koin-core:$koinVersion")
+    implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("com.trendyol:kediatr-core:$kediatrVersion")
     implementation("org.valiktor:valiktor-core:$valiktorVersion")
     implementation("com.github.ajalt.clikt:clikt:$cliktVersion")
@@ -48,7 +50,7 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
     testImplementation("io.kotest:kotest-property:$kotestVersion")
-    testImplementation("io.kotest:kotest-extensions-koin:$kotestVersion")
+    testImplementation("io.kotest.extensions:kotest-extensions-koin:$kotestKoinVersion")
     // END: Dependencies used for testing the application
 }
 
@@ -64,8 +66,21 @@ application {
     mainClass.set("it.oechsler.MainKt")
 }
 
-kotlin.sourceSets["main"].kotlin.srcDirs("src")
-kotlin.sourceSets["test"].kotlin.srcDirs("test")
+sourceSets.main {
+    java.srcDir("src")
+    resources.srcDir("resources")
+}
 
-sourceSets["main"].resources.srcDirs("resources")
-sourceSets["test"].resources.srcDirs("testresources")
+sourceSets.test {
+    java.srcDir("test")
+    resources.srcDir("testresources")
+}
+
+classDiagram {
+    val outputFolder = file("$buildDir/diagrams/")
+    outputFolder.mkdirs()
+
+    packageName = "it.oechsler"
+    outputFile = project.file("$outputFolder/class-diagram.plantuml")
+}
+

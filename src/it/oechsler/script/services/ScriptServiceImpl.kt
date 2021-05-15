@@ -2,7 +2,7 @@ package it.oechsler.script.services
 
 import it.oechsler.script.SnugScript
 import it.oechsler.script.data.*
-import it.oechsler.script.language.ScriptRoot
+import it.oechsler.script.language.Script
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.reflect.KClass
@@ -18,16 +18,16 @@ class ScriptServiceImpl : ScriptService {
 
         // NOTE: We need to do dynamic casting here, otherwise the loading
         // of scripts can not be done using the service layer pattern
-        private fun <T : ScriptRoot> Any?.toEntrypoint(clazz: KClass<T>): T =
+        private fun <T : Script> Any?.toEntrypoint(clazz: KClass<T>): T =
             takeIf { clazz.isInstance(it) }?.let { clazz.javaObjectType.cast(it) }
                 ?: throw ScriptRuntimeException("Script does not have a valid entrypoint")
 
     }
 
-    override fun <T : ScriptRoot> loadFromPath(script: Path, clazz: KClass<T>): T =
+    override fun <T : Script> loadFromPath(script: Path, clazz: KClass<T>): T =
         loadFromString(Files.readString(script), clazz)
 
-    override fun <T : ScriptRoot> loadFromString(script: String, clazz: KClass<T>): T =
+    override fun <T : Script> loadFromString(script: String, clazz: KClass<T>): T =
         kotlin.runCatching { eval(script) }
             .getOrThrow()
             .toEntrypoint(clazz)

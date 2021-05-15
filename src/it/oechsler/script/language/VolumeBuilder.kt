@@ -1,6 +1,8 @@
 package it.oechsler.script.language
 
-class VolumeBuilder private constructor(name: String) : StorageBuilder(name, "do-block-storage") {
+import it.oechsler.script.data.StorageClass
+
+class VolumeBuilder private constructor(name: String) : StorageBuilder(name, StorageClass.DO_BLOCK_STORAGE) {
 
     companion object {
 

@@ -13,7 +13,7 @@ class ConfigRepositoryImpl : ConfigRepository {
 
     private val configPath: Path = Paths.get("${System.getProperty("user.home")}/.snug")
 
-    private val configFile: File = File("$configPath/config.json")
+    private val configFile: File = File("$configPath/it.oechsler.config.json")
 
     private val serializer = Json { prettyPrint = true }
 
