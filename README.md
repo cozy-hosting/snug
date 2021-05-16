@@ -60,6 +60,12 @@ Es werden also keine Zustände für den nächsten Aufruf gesichert.
 docker run --rm snug:local [ARGS]
 ```
 
+#### Das Beispielskirpt ausführen
+
+```shell
+docker run --rm snug:local apply ./scripts/eample.snug.kts
+````
+
 ### Gradle
 
 Ist kein Docker vorhanden so lässt sich Snug auch über [Gradle](https://gradle.org/) erstellen und ausführen.
