@@ -152,3 +152,6 @@ gradle-app.setting
 # End of https://www.toptal.com/developers/gitignore/it.oechsler.api/kotlin,intellij,gradle
 
 /.idea/misc.xml
+
+### Userdefined entries ###
+/.idea/
