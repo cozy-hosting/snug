@@ -1,5 +1,8 @@
 # Snug
 
+[![Build Pipeline](https://github.com/cozy-hosting/snug/actions/workflows/default.yml/badge.svg)](https://github.com/cozy-hosting/snug/actions/workflows/default.yml)
+![Lines of code](https://img.shields.io/tokei/lines/github/cozy-hosting/snug)
+
 Snug ist ein Commandline Tool mit integrierter Skriptsprache für die **cozy** Cloud Plattform. Die Skriptsprache ist auf
 Basis einer internen Kotlin DSL errichtet und bietet die Möglichkeit, komplexe Deployments in Code umzusetzen 
 (Infrastructure as Code).
@@ -77,9 +80,9 @@ gadle assembleDist
 
 ## Clean Architecture
 
-![Snug class diagram](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/cozy-hosting/snug/main/docs/assets/class-diagram.plantuml)
+![Snug class diagram](http://www.plantuml.com/plantuml/proxy?fmt=svg&src=https://raw.githubusercontent.com/cozy-hosting/snug/main/docs/assets/class-diagram.plantuml)
 
-[Vollständig anzeigen](http://www.plantuml.com/plantuml/proxy?cache=no&fmt=svg&src=https://raw.githubusercontent.com/cozy-hosting/snug/main/docs/assets/class-diagram.plantuml)
+[Vollständig anzeigen](http://www.plantuml.com/plantuml/proxy?fmt=svg&src=https://raw.githubusercontent.com/cozy-hosting/snug/main/docs/assets/class-diagram.plantuml)
 
 Snug setzt grundlegend die Schichten der Clean Architecture um.
 Diese werden im Folgenden kurz von innen nach außen in ihrer vorhandenen Ausprägung erläutert.  
