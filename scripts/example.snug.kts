@@ -22,7 +22,7 @@ resources {
 
         mounts {
             "test-1" to path(root / "storage") with everyone
-            "some-it.oechsler.config" from config to path(root / "it.oechsler.config.yml") with default
+            "some-config" from config to path(root / "config.yml") with default
             "some-secret" from secret to path(root / "secret.txt") with permission(600)
         }
 
