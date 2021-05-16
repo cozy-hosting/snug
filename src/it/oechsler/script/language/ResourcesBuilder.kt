@@ -1,6 +1,8 @@
 package it.oechsler.script.language
 
-@Suppress("unused")
+import it.oechsler.script.SnugDsl
+
+@SnugDsl
 class ResourcesBuilder private constructor() : Script {
 
     companion object {

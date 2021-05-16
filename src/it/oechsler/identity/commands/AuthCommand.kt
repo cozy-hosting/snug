@@ -10,7 +10,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.qualifier.named
 
-class AuthCommand : CliktCommand(name = "auth", help = "Authenticate with the cozy it.oechsler.api", printHelpOnEmptyArgs = true),
+class AuthCommand : CliktCommand(name = "auth", help = "Authenticate with the cozy api", printHelpOnEmptyArgs = true),
     KoinComponent {
 
     private val authCommandBus by inject<CommandBus>(named<AuthCommandBus>())

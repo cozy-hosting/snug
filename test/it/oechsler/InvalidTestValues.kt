@@ -1,3 +1,5 @@
+package it.oechsler
+
 class InvalidTestValues {
     companion object {
         const val name = " "

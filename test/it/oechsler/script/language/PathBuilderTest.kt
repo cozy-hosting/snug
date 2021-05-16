@@ -1,5 +1,8 @@
+package it.oechsler.script.language
+
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
+import it.oechsler.ValidTestValues
 import it.oechsler.script.data.Path
 import it.oechsler.script.language.PathBuilder.Companion.path
 

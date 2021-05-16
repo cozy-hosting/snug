@@ -1,12 +1,13 @@
 package it.oechsler.script.language
 
+import it.oechsler.script.SnugDsl
 import it.oechsler.script.data.StorageWithTypeAndPath
 import it.oechsler.script.data.StorageWithType
 import it.oechsler.script.data.Mount
 import it.oechsler.script.data.MountType
 import it.oechsler.script.data.VolumeWithPath
 
-@Suppress("unused")
+@SnugDsl
 class MountBuilder private constructor() {
 
     companion object {

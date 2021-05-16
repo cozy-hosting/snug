@@ -10,7 +10,7 @@ import it.oechsler.script.services.ScriptService
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class RollbackCommand: CliktCommand(name = "rollback", help = "Evaluate and rollback a resource it.oechsler.script"), KoinComponent {
+class RollbackCommand: CliktCommand(name = "rollback", help = "Evaluate and rollback a resource script"), KoinComponent {
 
     private val scriptService: ScriptService by inject()
 

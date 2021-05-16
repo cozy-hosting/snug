@@ -1,4 +1,4 @@
-package it.oechsler.main.commands
+package it.oechsler.commands
 
 import com.github.ajalt.clikt.core.NoOpCliktCommand
 

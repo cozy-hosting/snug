@@ -1,9 +1,10 @@
 package it.oechsler.script.language
 
+import it.oechsler.script.SnugDsl
 import it.oechsler.script.data.LoadBalancedDeployment
 import it.oechsler.script.data.Port
 
-@Suppress("unused")
+@SnugDsl
 class LoadBalancedDeploymentBuilder private constructor(val name: String) {
 
     private var ports = setOf<Port>()
