@@ -62,8 +62,10 @@ docker run --rm snug:local [ARGS]
 
 #### Das Beispielskript ausführen
 
+In diesem Fall muss der Anwendung Zugriff auf das lokale Dateisystem gegeben werden.
+
 ```shell
-docker run --rm snug:local apply ./scripts/example.snug.kts
+docker run --rm -v $PWD:/data snug:local apply ./scripts/example.snug.kts
 ````
 
 ### Gradle
