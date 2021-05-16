@@ -18,12 +18,12 @@ versioniert werden.
 > Das initiale Release konzentriert sich derzeit in größerem Umfang auf die Skriptsprache, als das Commandline Tool.
 > Künftig soll aber auch eine Steuerung der Plattform Teil von Snug werden und die Sprache nur ein Modul
 > des gesammten Tools sein.
-> Darüberhinaus ist die Skripsrache derzeit ein *Proof of Concept*, der Produktiveinsatz ist noch nicht möglich.
+> Darüber hinaus ist die Skripsrache derzeit ein *Proof of Concept*, der Produktiveinsatz ist noch nicht möglich.
 
 ## Skriptbeispiel
 
 Das gezeigtes Beispiel stellt einen NGINX Webserver der neusten verfügbaren Version bereit. 
-Dieser ist auf Port `80`innerhalb des privaten Netzwerkes der Plattform erreichbar, noch nicht aber im Internet.
+Dieser ist auf Port `80` innerhalb des privaten Netzwerkes der Plattform erreichbar, aber noch nicht im Internet.
 
 ```kotlin
 deployment("nginx") {
@@ -45,7 +45,7 @@ deployment("nginx") {
 ### Docker
 
 Möglichst einfach lässt sich Snug erzeugen, indem [Docker](https://www.docker.com/) verwendet wird. 
-Hierzu lediglich das Docker Image erstellt werden.
+Hierzu muss lediglich das Docker Image erstellt werden.
 Dies geschieht mit dem unten aufgeführten Befehl.
 
 ```shell
@@ -129,7 +129,7 @@ der Konfigurationsdatei (ein tatsächliches DBMS wird dafür jedoch nicht verwen
 Snug verwendet *Aggregates*, *Entities*, *Value-Objects*, *Repositories* und *Services*.
 Einige dieser gehen auch bereits aus dem vorangehenden Abschnitt [Ubiquitous Language](#ubiquitous-language) hervor.
 
-So gibt es beispielsweise *Aggregates*, wie etwa `Ressources`, das Skripte gebündelt bereitstellt, 
+So gibt es beispielsweise *Aggregates*, wie etwa `Ressources`, welche Skripte gebündelt bereitstellt, 
 um batch-prossesing zu erlauben.
 *Entities* werden in Snug formuliert und sind Datenobjekte, sowie Bausteine der internen DSL.
 Alle Datenobjekte in Snug sind zusätzlich *Value-Objects*.
@@ -138,8 +138,8 @@ Diese Basis ergibt sich aus den in Kotlin spezifischen `data class` Objekten.
 So gibt es etwa das `ConfigRepository`, welches Abbilder der `Config` auf dem Dateisystem verwaltet.
 Neben ihnen werden auch *Services* eingetzt.
 Bei ihnen geht es um die allgemeine Bündelung von Funktionalitäten für einen bestimmten Bereich der Domäne.
-Ein solch sezifischer Problembereich ist in Snug das Laden und Ausführung von Skripten.
-Hierzu existiert dann ein `ScriptService`, der Funktionalität zur bewältigung eben dieses Problem bereitstellt.
+Ein solch spezifischer Problembereich ist in Snug das Laden und Ausführung von Skripten.
+Hierzu existiert dann ein `ScriptService`, der Funktionalität zur Bewältigung eben dieses Problems bereitstellt.
 
 ## Programming Principles
 
