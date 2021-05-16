@@ -1,10 +1,11 @@
 package it.oechsler.script.language
 
+import it.oechsler.script.SnugDsl
 import it.oechsler.script.data.Container
 import it.oechsler.script.data.Image
 import it.oechsler.script.data.Port
 
-@Suppress("unused")
+@SnugDsl
 class ContainerBuilder private constructor(val name: String) {
 
     companion object {
@@ -29,7 +30,6 @@ class ContainerBuilder private constructor(val name: String) {
     fun toContainer(): Container {
         return Container(name, image, ports)
     }
-
 
 }
 

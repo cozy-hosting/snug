@@ -1,10 +1,9 @@
 package it.oechsler.script.language
 
+import it.oechsler.script.SnugDsl
 import it.oechsler.script.data.Path
-import it.oechsler.script.language.PathBuilder.Companion.path
-import it.oechsler.script.language.PathBuilder.Companion.root
 
-@Suppress("unused")
+@SnugDsl
 class PathBuilder private constructor(private val destination: Path) {
 
     companion object {

@@ -1,9 +1,10 @@
 package it.oechsler.script.language
 
+import it.oechsler.script.SnugDsl
 import it.oechsler.script.data.Domain
 import it.oechsler.script.data.PublishDomains
 
-@Suppress("unused")
+@SnugDsl
 class PublishDomainBuilder private constructor(private val port: Int) {
     private var hostnamesToPublish: Set<Domain> = emptySet()
 

@@ -1,8 +1,9 @@
 package it.oechsler.script.language
 
+import it.oechsler.script.SnugDsl
 import it.oechsler.script.data.Permission
 
-@Suppress("unused")
+@SnugDsl
 class PermissionBuilder private constructor(private val permission: Permission) {
 
     companion object {

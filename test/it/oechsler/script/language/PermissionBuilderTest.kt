@@ -1,3 +1,5 @@
+package it.oechsler.script.language
+
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import it.oechsler.script.data.Permission

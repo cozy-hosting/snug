@@ -1,6 +1,10 @@
+package it.oechsler.script.language
+
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
+import it.oechsler.InvalidTestValues
+import it.oechsler.ValidTestValues
 import it.oechsler.script.data.NameAndSourcePort
 import it.oechsler.script.data.Port
 import it.oechsler.script.language.PortBuilder.Companion.ports

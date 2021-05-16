@@ -28,13 +28,13 @@ resources {
 
         publish {
             port(8081)
-            port(8082)
-            port(10)
+
             domains(8080) {
                 domain("www.oechsler.it")
                 domain("oechsler.it")
             }
-            domains(80) {
+
+            domains(8081) {
                 domain("www.obert.dev")
                 domain("obert.dev")
             }

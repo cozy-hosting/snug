@@ -1,9 +1,10 @@
 package it.oechsler.script.language
 
+import it.oechsler.script.SnugDsl
 import it.oechsler.script.data.NameAndSourcePort
 import it.oechsler.script.data.Port
 
-@Suppress("unused")
+@SnugDsl
 class PortBuilder private constructor() {
 
     companion object {

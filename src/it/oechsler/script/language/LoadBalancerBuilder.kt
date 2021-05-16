@@ -1,11 +1,12 @@
 package it.oechsler.script.language
 
+import it.oechsler.script.SnugDsl
 import it.oechsler.script.data.LoadBalancedDeployment
 import it.oechsler.script.data.LoadBalancer
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-@Suppress("unused")
+@SnugDsl
 class LoadBalancerBuilder private constructor(val name: String): Script {
 
     private var loadBalancedDeployments = setOf<LoadBalancedDeployment>()

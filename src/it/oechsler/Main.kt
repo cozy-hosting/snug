@@ -3,7 +3,7 @@ package it.oechsler
 import com.github.ajalt.clikt.core.subcommands
 import it.oechsler.identity.commands.AuthCommand
 import it.oechsler.identity.identity
-import it.oechsler.main.commands.MainCommand
+import it.oechsler.commands.MainCommand
 import it.oechsler.script.apply
 import it.oechsler.script.commands.ApplyCommand
 import it.oechsler.script.commands.RollbackCommand

@@ -1,9 +1,10 @@
 package it.oechsler.script.language
 
+import it.oechsler.script.SnugDsl
 import it.oechsler.script.data.Publish
 import it.oechsler.script.data.PublishDomains
 
-@Suppress("unused")
+@SnugDsl
 class PublishBuilder private constructor() {
 
     private var publishDomains = setOf<PublishDomains>()

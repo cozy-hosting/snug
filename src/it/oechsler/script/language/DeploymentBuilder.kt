@@ -1,5 +1,6 @@
 package it.oechsler.script.language
 
+import it.oechsler.script.SnugDsl
 import it.oechsler.script.data.Container
 import it.oechsler.script.data.Deployment
 import it.oechsler.script.data.Mount
@@ -8,7 +9,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlin.properties.Delegates
 
-@Suppress("unused")
+@SnugDsl
 class DeploymentBuilder private constructor(val name: String) : Script {
 
     companion object {
