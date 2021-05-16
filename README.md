@@ -60,10 +60,12 @@ Es werden also keine Zustände für den nächsten Aufruf gesichert.
 docker run --rm snug:local [ARGS]
 ```
 
-#### Das Beispielskirpt ausführen
+#### Das Beispielskript ausführen
+
+In diesem Fall muss der Anwendung Zugriff auf das lokale Dateisystem gegeben werden.
 
 ```shell
-docker run --rm snug:local apply ./scripts/eample.snug.kts
+docker run --rm -v $PWD:/data snug:local apply ./scripts/example.snug.kts
 ````
 
 ### Gradle
